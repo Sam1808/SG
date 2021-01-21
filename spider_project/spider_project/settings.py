@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'spider_market.apps.Spider_marketConfig'
+    'spider_market',
+    'rest_framework',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +102,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+DJOSER = {
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': False,
+}
+
+# AUTH_USER_MODEL = ''
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
