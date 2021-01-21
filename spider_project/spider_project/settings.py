@@ -114,7 +114,7 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': False,
 }
 
-# AUTH_USER_MODEL = ''
+AUTH_USER_MODEL = 'spider_market.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
