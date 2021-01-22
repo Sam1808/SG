@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'spider_market',
     'rest_framework',
     'djoser',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -112,6 +113,10 @@ REST_FRAMEWORK = {
 DJOSER = {
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': False,
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',)
 }
 
 AUTH_USER_MODEL = 'spider_market.User'
