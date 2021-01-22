@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 
 
 class CustomUserManager(BaseUserManager):
@@ -25,7 +26,7 @@ class CustomUserManager(BaseUserManager):
         )
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField('Логин', max_length=50, unique=True)
     email = models.EmailField('E-mail', max_length=100,)
     is_staff = models.BooleanField(default=False)
