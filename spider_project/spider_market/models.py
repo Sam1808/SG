@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
-
 class CustomUserManager(BaseUserManager):
 
     def _create_user(self, username, password, **extra_fields):
@@ -44,6 +43,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Category(models.Model):
     title = models.CharField("Название", max_length=50)
 
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
     def __str__(self):
         return self.title
 
@@ -55,6 +58,10 @@ class Company(models.Model):
         default=False,
         db_index=True
     )
+
+    class Meta:
+        verbose_name = 'Компания'
+        verbose_name_plural = 'Компании'
 
 
 class Product(models.Model):
@@ -77,6 +84,10 @@ class Product(models.Model):
         default=False,
         db_index=True
     )
+
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
 
     def __str__(self):
         return self.title
