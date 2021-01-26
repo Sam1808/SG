@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import User
+from .models import User, Category
 
 
 class UserRegisterSerializer(ModelSerializer):
@@ -17,3 +17,9 @@ class UserRegisterSerializer(ModelSerializer):
 
         user.save()
         return user
+
+
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['title']

@@ -2,7 +2,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
-from .serializers import UserRegisterSerializer
+from rest_framework.views import APIView
+from .serializers import UserRegisterSerializer, CategorySerializer
+
+from .models import Category
 
 
 class RegistrationApiView(CreateAPIView):
@@ -21,3 +24,10 @@ class RegistrationApiView(CreateAPIView):
 
         data = serializer.errors
         return Response(data)
+
+
+class CategoriesView(APIView):
+    def get(self, request):
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response({'categories': serializer.data})
