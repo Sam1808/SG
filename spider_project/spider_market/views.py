@@ -1,11 +1,12 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
-from .serializers import UserRegisterSerializer, CategorySerializer, CompanySerializer
+from .serializers import UserRegisterSerializer, CategorySerializer, CompanySerializer, ProductSerializer
 
-from .models import Category, Company
+from .models import Category, Company, Product
 
 
 class RegistrationApiView(CreateAPIView):
@@ -34,7 +35,22 @@ class CategoriesView(APIView):
 
 
 class CompaniesView(APIView):
-    def get(self ,request):
+    def get(self, request):
         companies = Company.objects.all().filter(is_active=True)
         serializer = CompanySerializer(companies, many=True)
         return Response({'companies': serializer.data})
+
+
+class ProductView(APIView):
+    def get(self, request, pk):
+        product = get_object_or_404(Product.objects.all(), pk=pk)
+        serializer = ProductSerializer(product)
+        return Response({'product': serializer.data})
+
+
+class ActiveProductsView(APIView):
+    def get(self, request):
+        products = Product.objects.all().filter(is_active=True)
+        serializer = ProductSerializer(products, many=True)
+        return Response({'products': serializer.data})
+

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from spider_market.views import RegistrationApiView, CategoriesView, CompaniesView
+from spider_market.views import RegistrationApiView, CategoriesView, CompaniesView, ProductView, ActiveProductsView
 
 
 urlpatterns = [
@@ -26,4 +26,6 @@ urlpatterns = [
     path('registr/', RegistrationApiView.as_view(), name='registr'),
     path('categories/', CategoriesView.as_view(), name='categories'),
     path('companies/', CompaniesView.as_view(), name='companies'),
+    path('product/<int:pk>', ProductView.as_view(), name='product'),
+    path('activeproducts/', ActiveProductsView.as_view(), name='activeproducts'),
 ]
