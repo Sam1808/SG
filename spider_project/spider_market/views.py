@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import AllowAny
+#  from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from .serializers import UserRegisterSerializer, CategorySerializer, CompanySerializer, ProductSerializer
 
@@ -12,7 +12,6 @@ from .models import Category, Company, Product
 class RegistrationApiView(CreateAPIView):
 
     serializer_class = UserRegisterSerializer
-    permission_class = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = UserRegisterSerializer(data=request.data)
@@ -54,3 +53,7 @@ class ActiveProductsView(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response({'products': serializer.data})
 
+
+class CreateProductView(CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
