@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
-from .serializers import UserRegisterSerializer, CategorySerializer
+from .serializers import UserRegisterSerializer, CategorySerializer, CompanySerializer
 
-from .models import Category
+from .models import Category, Company
 
 
 class RegistrationApiView(CreateAPIView):
@@ -31,3 +31,10 @@ class CategoriesView(APIView):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
         return Response({'categories': serializer.data})
+
+
+class CompaniesView(APIView):
+    def get(self ,request):
+        companies = Company.objects.all().filter(is_active=True)
+        serializer = CompanySerializer(companies, many=True)
+        return Response({'companies': serializer.data})
