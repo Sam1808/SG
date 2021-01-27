@@ -63,6 +63,9 @@ class Company(models.Model):
         verbose_name = 'Компания'
         verbose_name_plural = 'Компании'
 
+    def __str__(self):  # Only 4 cristal view
+        return self.description
+
 
 class Product(models.Model):
     title = models.CharField("Название", max_length=50)
