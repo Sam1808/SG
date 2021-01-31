@@ -50,11 +50,9 @@ class ProductView(APIView):
 
 
 @permission_classes([AllowAny])
-class ActiveProductsView(APIView):
-    def get(self, request):
-        products = Product.objects.all().filter(is_active=True)
-        serializer = ProductSerializer(products, many=True)
-        return Response({'products': serializer.data})
+class ActiveProductsView(ListAPIView):
+    queryset = Product.objects.all().filter(is_active=True)
+    serializer_class = ProductSerializer
 
 
 class CreateProductView(CreateAPIView):
