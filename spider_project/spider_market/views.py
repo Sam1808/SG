@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import permission_classes
-from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -30,19 +30,15 @@ class RegistrationApiView(CreateAPIView):
 
 
 @permission_classes([AllowAny])
-class CategoriesView(APIView):
-    def get(self, request):
-        categories = Category.objects.all()
-        serializer = CategorySerializer(categories, many=True)
-        return Response({'categories': serializer.data})
+class CategoriesView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
 @permission_classes([AllowAny])
-class CompaniesView(APIView):
-    def get(self, request):
-        companies = Company.objects.all().filter(is_active=True)
-        serializer = CompanySerializer(companies, many=True)
-        return Response({'companies': serializer.data})
+class CompaniesView(ListAPIView):
+    queryset = Company.objects.all().filter(is_active=True)
+    serializer_class = CompanySerializer
 
 
 @permission_classes([AllowAny])
