@@ -1,11 +1,9 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import permission_classes
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from rest_framework.views import APIView
 from .serializers import UserRegisterSerializer, CategorySerializer, CompanySerializer, ProductSerializer
 
 from .models import Category, Company, Product
@@ -42,11 +40,9 @@ class CompaniesView(ListAPIView):
 
 
 @permission_classes([AllowAny])
-class ProductView(APIView):
-    def get(self, request, pk):
-        product = get_object_or_404(Product.objects.all(), pk=pk)
-        serializer = ProductSerializer(product)
-        return Response({'product': serializer.data})
+class ProductView(RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
 @permission_classes([AllowAny])
