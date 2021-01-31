@@ -1,3 +1,4 @@
+from django_filters import rest_framework as filters
 from rest_framework import status
 from rest_framework.decorators import permission_classes
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
@@ -45,10 +46,23 @@ class ProductView(RetrieveAPIView):
     serializer_class = ProductSerializer
 
 
+class ActiveProductsFilter(filters.FilterSet):
+    title = filters.CharFilter(field_name='title', method='incomplete_search')
+
+    def incomplete_search(self, queryset, name, value):
+        return queryset.filter(title__contains=value)
+
+    class Meta:
+        model = Product
+        fields = ['title', 'category', 'company']
+
+
 @permission_classes([AllowAny])
 class ActiveProductsView(ListAPIView):
     queryset = Product.objects.all().filter(is_active=True)
     serializer_class = ProductSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = ActiveProductsFilter
 
 
 class CreateProductView(CreateAPIView):
