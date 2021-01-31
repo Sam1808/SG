@@ -22,17 +22,16 @@ class UserRegisterSerializer(ModelSerializer):
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class CompanySerializer(ModelSerializer):
     class Meta:
         model = Company
-        fields = ['description', 'is_active']
+        fields = ['id', 'description', 'is_active']
 
 
 class ProductSerializer(ModelSerializer):
     class Meta:
         model = Product
-        fields = ['title', 'description', 'category', 'company', 'is_active']
-
+        fields = ['id', 'title', 'description', 'category', 'company', 'is_active']
