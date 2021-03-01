@@ -51,7 +51,11 @@
 
 1.1 Скачайте код:<br>
 `git clone https://github.com/Sam1808/SG.git`
+<br><br>
 
+**ОБНОВЛЕНО:** 
+<br> Запустите `docker-compose up` и переходите к п.1.7. <br>Сервер будет доступен по адресу `http://127.0.0.1:8000/`.<br> Или продолжите ручную установку с пункта 1.2<br><br>
+ 
 1.2 Создайте виртуальное окружение, [активируте](https://devpractice.ru/python-lesson-17-virtual-envs/#p33) его и перейдите в папку `spider_project`:<br>
 `python3 -m venv _название_окружения_`
 
